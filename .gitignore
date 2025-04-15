@@ -1,0 +1,65 @@
+# Rails specific ignores
+/backend/bin/*
+/backend/log/*
+/backend/tmp/*
+!/backend/log/.keep
+!/backend/tmp/.keep
+/backend/tmp/pids/*
+!/backend/tmp/pids/.keep
+/backend/storage/*
+!/backend/storage/.keep
+/backend/.byebug_history
+/backend/public/assets
+/backend/public/packs
+/backend/public/packs-test
+/backend/node_modules
+/backend/yarn-error.log
+/backend/yarn-debug.log*
+/backend/.yarn-integrity
+/backend/config/master.key
+/backend/config/credentials/*.key
+/backend/.env*
+/backend/coverage/
+/backend/db/*.sqlite3
+/backend/db/*.sqlite3-*
+
+# Node.js specific ignores
+/frontend/node_modules/
+/frontend/dist/
+/frontend/build/
+/frontend/.env*
+/frontend/.pnp
+/frontend/.pnp.js
+/frontend/coverage/
+/frontend/npm-debug.log*
+/frontend/yarn-debug.log*
+/frontend/yarn-error.log*
+/frontend/.eslintcache
+/frontend/.DS_Store
+
+# Editor and OS specific files
+.DS_Store
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+
+# Terraform specific ignores
+/deploy/.terraform/
+/deploy/.terraform.lock.hcl
+/deploy/terraform.tfstate
+/deploy/terraform.tfstate.backup
+/deploy/*.tfvars
+/deploy/crash.log
+/deploy/*.pem
+
+# General
+*.log
+.env*
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local 
