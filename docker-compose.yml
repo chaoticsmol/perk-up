@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: perk-up-backend
+    restart: unless-stopped
+    environment:
+      - RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
+      - RAILS_ENV=production
+      - PORT=3000
+      - RAILS_SERVE_STATIC_FILES=true
+      - RAILS_USE_MASTER_KEY_FROM_ENV=true
+      - RAILS_LOG_TO_STDOUT=true
+      # Disable eager loading temporarily to see the specific error
+      - DISABLE_SPRING=true
+      - DISABLE_BOOTSNAP=true
+    volumes:
+      - backend-storage:/rails/storage
+    ports:
+      - "3000:80"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: perk-up-frontend
+    restart: unless-stopped
+    environment:
+      - PORT=3001
+      - NODE_ENV=production
+      - BACKEND_URL=http://backend
+    ports:
+      - "3001:3001"
+    depends_on:
+      - backend
+
+volumes:
+  backend-storage:
+    driver: local 

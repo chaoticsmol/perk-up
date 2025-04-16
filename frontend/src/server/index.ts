@@ -9,7 +9,7 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // API routes can be added here
-app.get('/api/health', (req, res) => {
+app.get('/api/health', (_req, res) => {
   res.json({ status: 'healthy' });
 });
 
@@ -18,7 +18,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.resolve(__dirname, '../../dist')));
 
   // Handle React routing, return all requests to React app
-  app.get('*', (req, res) => {
+  app.get('*', (_req, res) => {
     res.sendFile(path.resolve(__dirname, '../../dist', 'index.html'));
   });
 }
