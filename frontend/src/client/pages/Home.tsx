@@ -1,8 +1,15 @@
+import useSmile from "../hooks/use-smile";
+
 function Home() {
+  const { isSmileReady } = useSmile();
+
   return (
     <div className="home-container">
       <h1>Welcome to Perk Up!</h1>
-      <p>Boost your productivity with Perk Up! - the app that keeps you motivated.</p>
+      <p>Do cool things and earn rewards!</p>
+      { isSmileReady && (
+        <p>Smile is ready</p>
+      )}
     </div>
   );
 }
