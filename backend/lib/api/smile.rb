@@ -15,5 +15,9 @@ module Api
     def customer(id)
       get("/customers/#{id}", headers: @headers)
     end
+
+    def points_products(page: 1, per_page: 50)
+      get("/points_products?page=#{page}&page_size=#{per_page}", headers: @headers)
+    end
   end
 end

@@ -1,24 +1,28 @@
+import { useState, useEffect } from "react";
 import useSmile from "../hooks/use-smile";
-import getConfig from "../../config";
-import { getCustomer } from "../api/smile";
+import getConfig from "../config";
+import CustomerInfo from "../components/CustomerInfo";
+import PointsProductsList from "../components/PointsProductsList";
+import "./Home.css";
 
 function Home() {
   const { isSmileReady } = useSmile();
   const { user_id } = getConfig();
 
-  if (isSmileReady) {
-    getCustomer(user_id).then((customer) => {
-      console.log(customer);
-    });
+  if (!isSmileReady) {
+    return <div className="loading-container">Please wait while we prepare your rewards...</div>;
   }
 
   return (
     <div className="home-container">
-      { isSmileReady ? (
-        <p>Smile is ready</p>
-      ) : (
-        <p>Please wait while we prepare your rewards...</p>
-      ) }
+      <div className="home-columns">
+        <div className="column left-column">
+          <CustomerInfo customer_id={user_id} />
+        </div>
+        <div className="column right-column">
+          <PointsProductsList />
+        </div>
+      </div>
     </div>
   );
 }

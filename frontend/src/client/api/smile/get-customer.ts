@@ -1,6 +1,6 @@
 import getConfig from '../../config';
 
-interface Customer {
+export interface Customer {
   id: string;
   firstName: string | null;
   lastName: string | null;

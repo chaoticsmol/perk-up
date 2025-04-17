@@ -1,0 +1,43 @@
+.home-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.loading-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+  color: #555;
+  font-size: 1.1rem;
+}
+
+.home-columns {
+  display: flex;
+  gap: 24px;
+  height: 100%;
+}
+
+.column {
+  flex: 1;
+}
+
+.left-column {
+  /* Custom styles for left column if needed */
+}
+
+.right-column {
+  /* Custom styles for right column if needed */
+}
+
+/* Responsive layout for smaller screens */
+@media (max-width: 768px) {
+  .home-columns {
+    flex-direction: column;
+  }
+  
+  .column {
+    margin-bottom: 20px;
+  }
+} 
