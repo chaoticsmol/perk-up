@@ -4,10 +4,10 @@ Sorted in priority order.
 
 [x] Enable JavaScript SDK
 [x] Create custom activities for redemption, solving problems
-[ ] Initialize SDK in application with credentials
+[x] Initialize SDK in application with credentials
     [x] Fetch the Channel Key
-    [ ] Generate a JWT for the user I created
-[ ] Verify the loyalty UI shows on the page
+    [x] Generate a JWT for the user I created
+[x] Verify the loyalty UI shows on the page
 [ ] Understand how much functionality the SDK provides
 [ ] Understand where API may cover gaps
 [ ] Plan for how to fetch points

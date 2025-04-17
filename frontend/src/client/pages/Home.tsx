@@ -5,11 +5,11 @@ function Home() {
 
   return (
     <div className="home-container">
-      <h1>Welcome to Perk Up!</h1>
-      <p>Do cool things and earn rewards!</p>
-      { isSmileReady && (
+      { isSmileReady ? (
         <p>Smile is ready</p>
-      )}
+      ) : (
+        <p>Please wait while we prepare your rewards...</p>
+      ) }
     </div>
   );
 }
