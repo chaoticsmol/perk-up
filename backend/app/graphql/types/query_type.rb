@@ -1,9 +1,13 @@
 module Types
   class QueryType < Types::BaseObject
-    field :test_field, String, null: false,
-      description: "An example field added to the schema"
-    def test_field
-      "Hello GraphQL API!"
+    field :customer, Types::CustomerType, null: true do
+      description "Find a customer by ID"
+      argument :id, ID, required: true
+    end
+
+    def customer(id:)
+      client = ::Api::Smile.new(api_key: Rails.application.credentials.smile.private_key)
+      client.customer(id)['customer']
     end
   end
 end 
