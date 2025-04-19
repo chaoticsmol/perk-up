@@ -1,18 +1,5 @@
 import getConfig from '../../config';
-
-export interface Customer {
-  id: string;
-  firstName: string | null;
-  lastName: string | null;
-  email: string | null;
-  dateOfBirth: string | null;
-  pointsBalance: number | null;
-  referralUrl: string | null;
-  state: string | null;
-  vipTierId: string | null;
-  createdAt: string | null;
-  updatedAt: string | null;
-}
+import { Customer } from './types';
 
 const CUSTOMER_QUERY = `
   query GetCustomer($id: ID!) {

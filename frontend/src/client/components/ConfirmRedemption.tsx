@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
-import { PointsProduct as PointsProductType } from '@/api/smile';
+import { PointsProduct as PointsProductType, type Reward } from '@/api/smile';
+import { purchasePointsProduct } from '@/api/smile/purchase-points-product';
+import getConfig from "@/config";
 import './ConfirmRedemption.css';
+import FlexibleRedemptionPrice from './FlexibleRedemptionPrice';
 
 interface ConfirmRedemptionProps {
   product: PointsProductType;
-  onConfirm: () => void;
+  onConfirm: (reward: Reward) => void;
   onCancel: () => void;
 }
 
@@ -14,14 +17,21 @@ const ConfirmRedemption: React.FC<ConfirmRedemptionProps> = ({
   onCancel 
 }) => {
   const [isProcessing, setIsProcessing] = useState(false);
+  const [price, setPrice] = useState(product.exchangeType === "fixed" ? product.pointsPrice : product.variablePointsMin);
+  const { user_id } = getConfig();
 
   const handleConfirm = () => {
     setIsProcessing(true);
-    // Simulate API call
-    setTimeout(() => {
-      setIsProcessing(false);
-      onConfirm();
-    }, 1500);
+    // Make API call to purchase the points product
+    purchasePointsProduct(product.id, user_id, price)
+      .then((reward) => {
+        setIsProcessing(false);
+        onConfirm(reward);
+      })
+      .catch((error) => {
+        console.error('Error purchasing product:', error);
+        setIsProcessing(false);
+      });
   };
 
   return (
@@ -36,7 +46,12 @@ const ConfirmRedemption: React.FC<ConfirmRedemptionProps> = ({
         />
         <div className="redemption-details">
           <h3>{product.reward.name}</h3>
-          <p className="redemption-price">{product.pointsPrice} points</p>
+          {product.exchangeType === "fixed" && (
+            <p className="redemption-price">{product.pointsPrice} points</p>
+          )}
+          {product.exchangeType === "variable" && (
+            <FlexibleRedemptionPrice product={product} setPrice={setPrice} />
+          )}
         </div>
       </div>
       

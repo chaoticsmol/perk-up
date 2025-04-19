@@ -1,22 +1,5 @@
 import getConfig from '../../config';
-
-export interface Reward {
-  id: string;
-  name: string;
-  description: string | null;
-  imageUrl: string | null;
-}
-
-export interface PointsProduct {
-  id: string;
-  name: string;
-  description: string | null;
-  imageUrl: string | null;
-  pointsPrice: number;
-  createdAt: string;
-  updatedAt: string;
-  reward: Reward;
-}
+import { PointsProduct } from './types';
 
 const POINTS_PRODUCTS_QUERY = `
   query GetPointsProducts {
@@ -28,6 +11,7 @@ const POINTS_PRODUCTS_QUERY = `
       variablePointsStep
       variablePointsStepRewardValue
       variablePointsMax
+      variablePointsMin
       reward {
         id
         name
