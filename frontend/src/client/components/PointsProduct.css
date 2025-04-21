@@ -85,6 +85,9 @@
 
 .redeem-button:disabled {
   cursor: not-allowed;
+  background-color: #cccccc;
+  color: #999999;
+  opacity: 0.8;
 }
 
 .redeem-button.redeemed {

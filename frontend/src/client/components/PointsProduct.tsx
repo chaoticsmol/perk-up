@@ -1,14 +1,15 @@
 import { useState } from "react";
 import "./PointsProduct.css";
-import { PointsProduct as PointsProductType, type Reward } from "@/api/smile";
+import { Customer, PointsProduct as PointsProductType, type Reward } from "@/api/smile";
 import Popup from "./Popup";
 import ConfirmRedemption from "./ConfirmRedemption";
 
 interface PointsProductProps {
+  customer: Customer;
   product: PointsProductType;
 }
 
-const PointsProduct = ({ product }: PointsProductProps) => {
+const PointsProduct = ({ customer, product }: PointsProductProps) => {
   const [showPopup, setShowPopup] = useState(false);
   const [redeemed, setRedeemed] = useState(false);
   const [redeemedReward, setRedeemedReward] = useState<Reward | null>(null);
@@ -62,7 +63,7 @@ const PointsProduct = ({ product }: PointsProductProps) => {
           <button 
             className={`redeem-button ${redeemed ? "redeemed" : ""}`} 
             onClick={handleRedeem}
-            disabled={redeemed}
+            disabled={redeemed || customer.pointsBalance === null || customer.pointsBalance < product.pointsPrice}
           >
             {redeemed ? "Redeemed!" : "Redeem"}
           </button>

@@ -44,7 +44,7 @@ function Home() {
           <PointsAdjuster customer={customer} />
         </div>
         <div className="column right-column">
-          <PointsProductsList />
+          <PointsProductsList customer={customer} />
         </div>
       </div>
     </div>

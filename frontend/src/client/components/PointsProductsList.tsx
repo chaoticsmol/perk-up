@@ -1,9 +1,13 @@
 import { useState, useEffect } from "react";
-import { getPointsProducts } from "@/api/smile";
+import { Customer, getPointsProducts } from "@/api/smile";
 import PointsProduct from "./PointsProduct";
 import "./PointsProductsList.css";
 
-const PointsProductsList = () => {
+export type PointsProductsListProps = {
+  customer: Customer;
+}
+
+const PointsProductsList = ({ customer }: PointsProductsListProps) => {
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -25,7 +29,7 @@ const PointsProductsList = () => {
       ) : (
         <div className="products-grid">
           {products.map((product) => (
-            <PointsProduct key={product.id} product={product} />
+            <PointsProduct key={product.id} customer={customer} product={product} />
           ))}
         </div>
       )}
