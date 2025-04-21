@@ -46,5 +46,8 @@ USER appuser
 # Expose the port the app runs on
 EXPOSE 3001
 
+# Set host environment variable to listen on all interfaces
+ENV HOST=0.0.0.0
+
 # Start the application with the server file
 CMD ["node", "server.mjs"] 

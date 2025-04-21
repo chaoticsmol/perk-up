@@ -63,6 +63,9 @@ RUN groupadd --system --gid 1000 rails && \
     chmod +x /rails/bin/docker-entrypoint
 USER 1000:1000
 
+# Set environment variables for binding to all interfaces
+ENV BINDING="0.0.0.0"
+
 # Entrypoint prepares the database.
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
