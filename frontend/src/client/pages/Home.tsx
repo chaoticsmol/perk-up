@@ -12,6 +12,13 @@ function Home() {
   const { isSmileReady } = useSmile();
   const { user_id } = getConfig();
   const [customer, setCustomer] = useState<Customer | null>(null);
+  const [isAdmin, setIsAdmin] = useState<boolean>(false);
+
+  useEffect(() => {
+    // Check for admin query parameter
+    const searchParams = new URLSearchParams(window.location.search);
+    setIsAdmin(searchParams.get('admin') === 'true');
+  }, []);
 
   // When we submit an activity, we don't get any information about the customer's balance, or the ID of the
   // points transaction created, so I'm opting to just poll the customer endpoint every second to get the latest balance.
@@ -41,7 +48,7 @@ function Home() {
         <div className="column left-column">
           <CustomerInfo customer={customer} />
           <MathProblem customer={customer} />
-          <PointsAdjuster customer={customer} />
+          {isAdmin && <PointsAdjuster customer={customer} />}
         </div>
         <div className="column right-column">
           <PointsProductsList customer={customer} />
