@@ -1,24 +1,11 @@
-import { useState, useEffect } from "react";
-import { Customer, getCustomer } from "@/api/smile";
+import { Customer } from "@/api/smile";
 import "./CustomerInfo.css";
 
 interface CustomerInfoProps {
-  customer_id: string;
+  customer: Customer;
 }
 
-const CustomerInfo = ({ customer_id }: CustomerInfoProps) => {
-  const [customer, setCustomer] = useState<Customer | null>(null);
-
-  useEffect(() => {
-    getCustomer(customer_id).then((customer: Customer) => {
-      setCustomer(customer);
-    });
-  }, [customer_id]);
-
-  if (!customer) {
-    return <div>Loading customer info...</div>;
-  }
-
+const CustomerInfo = ({ customer }: CustomerInfoProps) => {
   const name = customer.firstName ? customer.firstName : customer.email;
 
   return (

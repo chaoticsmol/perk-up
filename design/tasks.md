@@ -13,15 +13,9 @@ Sorted in priority order.
 [x] Plan for how to fetch points
 [x] Plan for how to fetch redemption options
 [x] Handle variable vs fixed points redemtpion
-[ ] Implement math problem feature
-    [ ] Create custom action
-    [ ] Generate neat math problems we can verify
-    [ ] Issue action and refresh customer info
-[ ] Implement points adjustment feature
-
-Solved a math equation:
-
-```js
-// Returns a promise.
-Smile.createActivity({ token: 'activity_abiJS83u3q2FRxqHG2bC53U8' })
-```
+[x] Implement math problem feature
+    [x] Create custom action
+    [x] Generate neat math problems we can verify
+    [x] Issue action and refresh customer info
+[x] Add types to API client functions
+[x] Implement points adjustment feature

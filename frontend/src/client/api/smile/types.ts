@@ -39,3 +39,12 @@ export interface PointsProduct {
   variablePointsMin: number;
   reward: Reward;
 }
+
+export interface MathProblemResponse {
+  correct: boolean;
+  balance: number;
+}
+
+export interface AdjustPointsBalanceResponse {
+  success: boolean;
+}
