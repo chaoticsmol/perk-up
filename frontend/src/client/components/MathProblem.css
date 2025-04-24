@@ -1,0 +1,66 @@
+.math-problem {
+  background-color: #fff1f1;
+  border: 1px solid #ffcaca;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px 0;
+}
+
+.math-problem h3 {
+  color: #d32f2f;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.problem-display {
+  font-size: 24px;
+  font-weight: bold;
+  color: #b71c1c;
+  margin: 20px 0;
+  text-align: center;
+}
+
+.math-problem form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.math-problem input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ffcaca;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.math-problem button {
+  background-color: #ff5252;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.math-problem button:hover {
+  background-color: #ff1744;
+}
+
+.result {
+  margin: 15px 0;
+  padding: 10px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.result.correct {
+  background-color: #c8e6c9;
+  color: #2e7d32;
+}
+
+.result.incorrect {
+  background-color: #ffebee;
+  color: #c62828;
+}

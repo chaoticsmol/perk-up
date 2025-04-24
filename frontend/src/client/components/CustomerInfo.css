@@ -1,0 +1,29 @@
+.customer-info {
+  background-color: #f0f8ff; /* Light blue background */
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  margin-bottom: 20px;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.customer-info:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
+}
+
+.customer-greeting {
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+  color: #333;
+}
+
+.customer-points {
+  font-size: 1.1rem;
+  color: #555;
+}
+
+.customer-points strong {
+  color: #4a90e2;
+  font-size: 1.2rem;
+} 
