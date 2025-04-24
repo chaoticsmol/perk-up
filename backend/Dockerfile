@@ -42,6 +42,9 @@ RUN bundle install && \
 # Copy application code
 COPY . .
 
+# Make sure bin scripts are executable
+RUN chmod +x /rails/bin/*
+
 # Precompile bootsnap code for faster boot times
 RUN bundle exec bootsnap precompile app/ lib/
 
@@ -52,15 +55,39 @@ FROM base
 COPY --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
 COPY --from=build /rails /rails
 
+# Ensure bin directory scripts are executable in the final stage
+RUN if [ -d /rails/bin ]; then chmod +x /rails/bin/*; fi
+
 # Create and set correct permissions on directories that need to be writable
 RUN mkdir -p /rails/config /rails/db /rails/log /rails/storage /rails/tmp && \
     chmod -R 777 /rails/config /rails/db /rails/log /rails/storage /rails/tmp
 
+# Create a simple docker-entrypoint script
+RUN mkdir -p /rails/bin && \
+    echo '#!/bin/bash' > /rails/bin/docker-entrypoint && \
+    echo 'if [ "${1}" = "./bin/rails" ] && [ "${2}" = "server" ]; then' >> /rails/bin/docker-entrypoint && \
+    echo '  echo "Preparing database..."' >> /rails/bin/docker-entrypoint && \
+    echo '  ./bin/rails db:prepare' >> /rails/bin/docker-entrypoint && \
+    echo 'fi' >> /rails/bin/docker-entrypoint && \
+    echo 'exec "$@"' >> /rails/bin/docker-entrypoint && \
+    chmod +x /rails/bin/docker-entrypoint
+
+# Create the thrust script
+RUN echo '#!/bin/bash' > /rails/bin/thrust && \
+    echo 'exec "$@"' >> /rails/bin/thrust && \
+    chmod +x /rails/bin/thrust
+
+# Create rails script if needed
+RUN if [ ! -f /rails/bin/rails ]; then \
+    echo '#!/bin/bash' > /rails/bin/rails && \
+    echo 'exec bundle exec rails "$@"' >> /rails/bin/rails && \
+    chmod +x /rails/bin/rails; \
+    fi
+
 # Run and own only the runtime files as a non-root user for security
 RUN groupadd --system --gid 1000 rails && \
     useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash && \
-    chown -R rails:rails /rails && \
-    chmod +x /rails/bin/docker-entrypoint
+    chown -R rails:rails /rails
 USER 1000:1000
 
 # Set environment variables for binding to all interfaces
